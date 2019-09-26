@@ -1,0 +1,25 @@
+
+<%=image_tag('OLX-banner.jpg',size: '1300x300')%>
+<div class="container">
+   <div class="row">
+  <%@ads.each do |ad|%>
+
+   <div class="col-md-3" style="border:2px solid black;">
+     <h1><%=ad.title%></h1>
+    <div>
+       <%=image_tag(ad.pictures.first.picture_name.url,size: '100x100')%>
+    </div>
+   <div>
+       <label><%=ad.category.name%></label> 
+   </div>
+   <div><%=ad.sub_category.name%></div>
+   <div>Rs:<%=ad.price%></div>
+   <div><%=link_to 'Show Ad',ad_path(ad.id)%></div>
+   </div>
+   
+
+ <%end%>
+  </div>
+</div>
+
+

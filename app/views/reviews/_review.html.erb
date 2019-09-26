@@ -1,0 +1,9 @@
+
+ <table>
+ 	<%Review.where(ad_id:params[:ad_id]).each do |review|%>
+		<tr>
+			<td><%=review.review_text%></td>
+		
+		</tr>
+ 	<%end%>
+ </table>

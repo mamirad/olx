@@ -1,0 +1,99 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-7">
+    <%=image_tag(@ad.pictures.first.picture_name.url,size: '500x500')%>
+  </div>
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>RS:<%= @ad.price %></h1>
+        <p>
+          <strong>Title:</strong>
+          <%= @ad.title %>
+        </p>
+        <div id="bid_response"></div>
+        <%= form_tag '/bids', remote: true, method: :post, id: "bid" do %>
+         <%= number_field_tag :bid_price, '', placeholder: "Type Bid"%>
+         <%= hidden_field_tag :ad_id, @ad.id%>
+         <%= button_tag 'Submit', class: 'btn btn-primary',
+                           data: { disable_with: "<i class='fa fa-refresh fa-spin'>
+          </i> Submitting Changes..."} %>
+       <%end%>
+      </div>
+      <div class="col-md-12">
+        <h1>Saller Detail</h1>
+        <h3><%=@ad.user.name%></h3>
+          City <b><%= @ad.city %>
+          <br></b> 
+          Contact <b><%= @ad.contact %></b>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<p>
+  <strong>Category:</strong>
+  <%= @ad.category_id %>
+</p>
+
+<p>
+  <strong>Sub category:</strong>
+  <%= @ad.sub_category_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @ad.user_id %>
+</p>
+
+<p>
+  <strong>Condition:</strong>
+  <%= @ad.condition %>
+</p>
+
+<p>
+  <strong>Detail:</strong>
+  <%= @ad.detail %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @ad.city %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @ad.address %>
+</p>
+
+<div id="reviews">
+  <h1>Reviews</h1>
+  <table>
+   <%@ad.reviews.each do |review|%>
+   <tr>
+    <td>
+        <%=review.review_text%>
+    </td>
+    <td>
+        <%=review.user.name%>
+    </td>
+  
+      
+    </tr>
+   <%end%>
+  </table>
+</div>
+<%= form_tag '/reviews', remote: true, method: :post, id: "reviews" do %>
+   <%= text_field_tag :review_text, '', placeholder: "Type review about Ad"%>
+   <%= hidden_field_tag :ad_id, @ad.id%>
+   <%= button_tag 'Submit', class: 'btn btn-primary',
+                     data: { disable_with: "<i class='fa fa-refresh fa-spin'>
+    </i> Submitting Changes..."} %>
+ <%end%>
+
+<%if @ad.user.id==current_user.id %>
+<%= link_to 'Edit', edit_ad_path(@ad) %> |
+<%end%>
+<%= link_to 'Back', ads_path %>

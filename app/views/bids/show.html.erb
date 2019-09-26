@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+	<%@ad_bids.each do |bid|%>
+	<tr>
+		<td><%= bid.price %></td>
+		<td><%= bid.user.name %></td>
+		<td><%= bid.user.contact %></td>
+		<td><%= bid.status %></td>
+		<td>
+		
+			<%= link_to "Approved", approve_bid_path(bid), method: :get,  class: "btn btn-primary"%>
+
+		</td>
+	</tr>
+	<%end%>
+</table>
+
+
+<%#= link_to 'Edit', edit_bid_path(@bid) %> |
+<%#= link_to 'Back', bids_path %>
