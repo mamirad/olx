@@ -15,7 +15,7 @@ gem 'activeadmin'
 gem 'simple_form'
 gem 'bootstrap-sass', '3.3.7'
 gem 'jquery-rails'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 
 
 
